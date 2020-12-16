@@ -4,10 +4,10 @@
     <div class="hero-body">
       <div class="container">
         <h1 class="title">
-          Films & Flow       
+          films & flow       
         </h1>
         <h2 class="subtitle">
-          Seus filmes e séries seguindo um só fluxo
+          seus filmes e séries em fluxo
         </h2>
         <div class="button-block">
           <button v-if="!$auth.isAuthenticated" @click="login" class="button is-xl is-dark">Sign Up to Browse Events</button>
@@ -48,10 +48,12 @@ export default {
     text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.6);
     padding: 40px 0 20px 0;
     font-size: 60px;
+    font-family: 'Emblema One', cursive;
   }
   .subtitle {
     text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.7);
     font-size: 30px;
+    font-family: 'Lexend Zetta', sans-serif;
   }
   .button-block {
     text-align: center;

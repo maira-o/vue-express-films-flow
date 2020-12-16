@@ -29,49 +29,30 @@
   </div>
 </template>
 <script>
+// NEW - import FilmService
+import FilmService from '@/services/FilmService.js';
 export default {
   name: 'FilmSingle',
-  data () {
-     return {
-      film: {},
-      films: [
-        {
-          id: 1,
-          name: 'Quem Quer Ser um Milionário?',
-          origin: 'UK | USA',
-          year: '2008',
-          director: 'Danny Boyle',
-          images: [
-            'https://placekitten.com/500/500',
-            'https://placekitten.com/500/500',
-            'https://placekitten.com/500/500',
-          ],
-          genre: 'drama',
-          language: 'inglês',
-          status: 'assistido'
-        },
-        {
-          id: 2,
-          name: 'Quem Quer Ser',
-          origin: 'UK | USA',
-          year: '2008',
-          director: 'Danny Boyle',
-          images: [
-            'https://placekitten.com/500/500',
-            'https://placekitten.com/500/500',
-            'https://placekitten.com/500/500',
-          ],
-          genre: 'drama',
-          language: 'inglês',
-          status: 'assistido'
-        }
-      ]
-    } 
+  data() {
+    // NEW - initialize the event object
+    return {
+      film: {}
+    }
   },
   created() {
-    const ID = Number(this.$route.params.id);
-    let film = this.films.find(film => film.id === ID);
-    this.film = film;
+    this.getFilmData(); // NEW - call getEventData() when the instance is created
+  },
+  // NEW
+  methods: {
+    async getFilmData() {
+      // Use the eventService to call the getEventSingle() method
+      FilmService.getFilmSingle(this.$route.params.id)
+      .then(
+        (film => {
+          this.$set(this, "film", film);
+        }).bind(this)
+      );
+    }
   }
 }
 </script>

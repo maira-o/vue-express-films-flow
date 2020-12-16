@@ -20,51 +20,37 @@
     </div>
   </div>
 </template>
+<!-- client/src/views/FilmSingle.vue -->
 <script>
-  import FilmCard from '@/components/FilmCard';
+import FilmCard from "@/components/FilmCard";
+import FilmService from '@/services/FilmService.js'; // NEW
 export default {
-  name: 'FilmsList',
-  components : {
+  name: "FilmsList",
+  components: {
     FilmCard
   },
-  data () {
+  data() {
     return {
       film: {},
-      films: [
-        {
-          id: 1,
-          name: 'Quem Quer Ser um Milionário?',
-          origin: 'UK | USA',
-          year: '2008',
-          director: 'Danny Boyle',
-          images: [
-            'https://placekitten.com/500/500',
-            'https://placekitten.com/500/500',
-            'https://placekitten.com/500/500',
-          ],
-          genre: 'drama',
-          language: 'inglês',
-          status: 'assistido'
-        },
-        {
-          id: 2,
-          name: 'Quem Quer Ser um Milionário?',
-          origin: 'UK | USA',
-          year: '2008',
-          director: 'Danny Boyle',
-          images: [
-            'https://placekitten.com/500/500',
-            'https://placekitten.com/500/500',
-            'https://placekitten.com/500/500',
-          ],
-          genre: 'drama',
-          language: 'inglês',
-          status: 'assistido'
-        }
-      ]
-    }    
+      films: []
+    };
+  },
+  created() {
+    this.getFilmsData(); // NEW - call getEventData() when the instance is created
+  },
+  // NEW
+  methods: {
+    async getFilmsData() {
+      // NEW - Use the eventService to call the getEvents() method
+      FilmService.getFilms()
+      .then(
+        (films => {
+          this.$set(this, "films", films);
+        }).bind(this)
+      );
+    }
   }
-}
+};
 </script>
 <style lang="scss" scoped>
   .films {
