@@ -4,15 +4,19 @@ import axios from "axios"
 
 export default {
   async getFilms() {
-    let res = await axios.get("http://localhost:8000/films");
+    let res = await axios.get("http://localhost:8000/api/films");
     return res.data;
   },
-  async getFilmSingle(filmId, accessToken) {
-    let res = await axios.get("http://localhost:8000/films/" + filmId, {
+  async getFilmSingle(filmId) {
+    let res = await axios.get("http://localhost:8000/api/films/" + filmId);
+    return res.data;
+  }
+  /**async getFilmSingle(filmId, accessToken) {
+    let res = await axios.get("http://localhost:8000/api/films/" + filmId, {
       headers: {
         Authorization: `Bearer ${accessToken}`
       }
     });
     return res.data;
-  }
+  }*/
 }

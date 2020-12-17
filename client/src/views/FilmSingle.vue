@@ -46,15 +46,21 @@ export default {
   methods: {
     async getFilmData() {
       // Get the access token from the auth wrapper
-      const accessToken = await this.$auth.getTokenSilently()
+      // const accessToken = await this.$auth.getTokenSilently()
       // console.log(accessToken)
       // Use the eventService to call the getEventSingle() method
       FilmService.getFilmSingle(this.$route.params.id, accessToken)
-      .then(
-        (film => {
-          this.$set(this, "film", film);
-        }).bind(this)
-      );
+        .then(
+          (film => {
+            this.$set(this, "film", film);
+          }).bind(this)
+        );
+      FilmService.getFilmSingle(this.$route.params.id)
+        .then(
+          (film => {
+            this.$set(this, "film", film);
+          }).bind(this)
+        );
     }
   }
 }

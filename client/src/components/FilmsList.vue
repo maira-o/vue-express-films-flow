@@ -3,6 +3,7 @@
     <h2 class="subtitle is-3">
       Confira alguns filmes
     </h2>
+    <input type="text" v-model="pesquisa">
     <div class="columns is-multiline">
       <div 
         v-for="film in films" 
@@ -12,9 +13,8 @@
 
         <router-link 
           :to="'/film/' + film.id">
-
+        
           <FilmCard :film="film" />
-
         </router-link>
       </div>
     </div>
@@ -32,10 +32,11 @@ export default {
   data() {
     return {
       film: {},
-      films: []
+      films: [],
+      pesquisa: ''
     };
   },
-  created() {
+  updated() {
     this.getFilmsData(); // NEW - call getEventData() when the instance is created
   },
   // NEW
@@ -45,7 +46,7 @@ export default {
       FilmService.getFilms()
       .then(
         (films => {
-          this.$set(this, "films", films);
+          this.$set(this, "films", films.filter(film => film.name.includes(this.pesquisa)));
         }).bind(this)
       );
     }
